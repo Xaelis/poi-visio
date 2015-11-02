@@ -25,13 +25,6 @@
 	</properties>
 	
 	<dependencies>
-
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi</artifactId>
-			<version>${poiVersion}</version>
-		</dependency>
-		
 		<dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-scratchpad</artifactId>
@@ -56,11 +49,11 @@
 			<version>2011.1</version>
 		</dependency>
         
-		<dependency>
+		<!-- <dependency>
 			<groupId>net.sourceforge.curves</groupId>
 			<artifactId>curvesapi</artifactId>
 			<version>1.02</version>
-		</dependency>
+		</dependency> -->
 		
 		<dependency>
 		  <groupId>junit</groupId>

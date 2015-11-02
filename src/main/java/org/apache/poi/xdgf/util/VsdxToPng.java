@@ -38,7 +38,6 @@ package org.apache.poi.xdgf.util;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -114,21 +113,24 @@ public class VsdxToPng {
 	}
 	
 	public static void main(String [] args) throws Exception {
-		if (args.length > 2) {
+		/*if (args.length > 2) {
 			System.err.println("Usage: [--debug] in.vsdx outdir");
 			System.exit(1);
-		}
+		}*/
 		
 		ShapeRenderer renderer = new ShapeRenderer();
 		
-		String inFilename = args[0];
-		String pngDir = args[1];
+		//String inFilename = args[0];
+		//String pngDir = args[1];
+
+		String inFilename = "src/main/resources/A2.vsdx";
+		String pngDir = ".";//args[1];
 		
-		if (args[0].equals("--debug")) {
+		/*if (args[0].equals("--debug")) {
 			inFilename = args[1];
 			pngDir = args[2];
 			renderer = new ShapeDebuggerRenderer();
-		}
+		}*/
 		
 		XmlVisioDocument doc = new XmlVisioDocument(new FileInputStream(inFilename));
 		renderToPng(doc, pngDir, 2000/11.0, renderer);

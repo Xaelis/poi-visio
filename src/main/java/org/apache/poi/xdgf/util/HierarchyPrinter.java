@@ -38,7 +38,7 @@ public class HierarchyPrinter {
 		OutputStream os = new FileOutputStream(pageFile);
 		PrintStream pos = new PrintStream(os);
 		
-		printHierarchy(page, pos);
+		printHierarchy(page, System.out);
 		
 		pos.close();
 	}
@@ -46,6 +46,30 @@ public class HierarchyPrinter {
 	public static void printHierarchy(XDGFPage page, final PrintStream os) {
 
 		page.getContent().visitShapes(new ShapeVisitor() {
+			
+			private final String types[] = {"Start Event", "Task", "Gateway", "End Event"};
+			
+			/**
+			* {@inheritDoc}
+			*/
+			@Override
+			public boolean accept(XDGFShape shape)
+			{
+				for (String type : types)
+				{
+					if (type.equals(shape.getSymbolName()))
+					{
+						return true;
+					}
+				}
+				
+				if (shape.getSymbolName() != null && shape.getSymbolName().length() > 0)
+				{
+					System.out.println(shape.getSymbolName() + " Unsupported");
+				}
+				return false;
+				
+			}
 			
 			@Override
 			public void visit(XDGFShape shape, AffineTransform globalTransform, int level) {
@@ -69,13 +93,13 @@ public class HierarchyPrinter {
 	
 	
 	public static void main(String [] args) throws Exception {
-		if (args.length != 2) {
+		/*if (args.length != 2) {
 			System.err.println("Usage: in.vsdx outdir");
 			System.exit(1);
-		}
+		}*/
 		
-		String inFilename = args[0];
-		String outDir = args[1];
+		String inFilename = "src/main/resources/A2.vsdx";
+		String outDir = ".";//args[1];
 		
 		XmlVisioDocument doc = new XmlVisioDocument(new FileInputStream(inFilename));
 		printHierarchy(doc, outDir);
